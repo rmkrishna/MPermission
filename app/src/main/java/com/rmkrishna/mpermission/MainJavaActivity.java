@@ -18,16 +18,12 @@
 package com.rmkrishna.mpermission;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
 import com.rmkrishna.permission.MPermission;
 import com.rmkrishna.permission.MPermissionListener;
-import com.rmkrishna.permission.PermissionListener;
 
 import org.jetbrains.annotations.NotNull;
 
