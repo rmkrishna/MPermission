@@ -22,7 +22,7 @@ class MFragment : Fragment() {
 
     private var permissions: ArrayList<String> = arrayListOf()
 
-    private lateinit var listener: PermissionListener
+    private lateinit var listener: MPermissionListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class MFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_m, container, false)
     }
 
-    fun setListener(@Nullable listener: PermissionListener): MFragment {
+    fun setListener(@Nullable listener: MPermissionListener): MFragment {
 
         this.listener = listener
 

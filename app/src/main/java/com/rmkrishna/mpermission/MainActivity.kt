@@ -1,5 +1,6 @@
 package com.rmkrishna.mpermission
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
@@ -10,11 +11,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
-
 
         askContactPermission.setOnClickListener {
             askPermissions(MPermission.WRITE_CONTACTS) {
@@ -76,6 +75,15 @@ class MainActivity : AppCompatActivity() {
                     ).show()
                 }
             }
+        }
+
+        openJavaActivity.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@MainActivity,
+                    MainJavaActivity::class.java
+                )
+            )
         }
     }
 }

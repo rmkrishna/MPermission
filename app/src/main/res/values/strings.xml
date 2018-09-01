@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MPermission</string>
+    <string name="title_activity_main_java">MainJavaActivity</string>
 </resources>

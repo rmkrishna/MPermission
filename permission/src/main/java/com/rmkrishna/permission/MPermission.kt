@@ -7,36 +7,37 @@ import android.support.v7.app.AppCompatActivity
 
 private const val MFragment_TAG = "MFragment_TAG"
 
+
 fun AppCompatActivity.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
-    checkAndAskPermission(permissions.filter { true }, listener)
+    checkAndAskPermission(permissions.filter { true }, getPermissionListener(listener))
 }
 
 fun Fragment.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
-    activity!!.checkAndAskPermission(permissions.filter { true }, listener)
+    activity!!.checkAndAskPermission(permissions.filter { true }, getPermissionListener(listener))
 }
 
 private fun FragmentActivity.checkAndAskPermission(
     permissions: List<String>,
-    listener: PermissionListener.() -> Unit
+    listener: MPermissionListener
 ) {
 
-    val permissionListener = getPermissionListener(listener)
+//    val permissionListener = getPermissionListener(listener)
 
-    val notGrantedPermissions = permissions.filter { hasPermission(it) }
+    val notGrantedPermissions = permissions.filter { !hasPermission(it) }
 
-    if (notGrantedPermissions.isEmpty()) permissionListener.granted() else {
+    if (notGrantedPermissions.isEmpty()) listener.granted() else {
         val mFragment = supportFragmentManager.findFragmentByTag(MFragment_TAG)
 
         if (mFragment == null) {
             var fragment =
                 MFragment.newInstance(permissions = notGrantedPermissions as ArrayList<String>)
-            fragment = fragment.setListener(permissionListener)
+            fragment = fragment.setListener(listener)
 
             supportFragmentManager.beginTransaction().add(fragment, MFragment_TAG)
                 .commitNowAllowingStateLoss()
@@ -129,4 +130,13 @@ object MPermission {
 
     const val READ_EXTERNAL_STORAGE = Manifest.permission.READ_EXTERNAL_STORAGE
     const val WRITE_EXTERNAL_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE
+
+    @JvmStatic
+    fun askPermissions(
+        activity: FragmentActivity,
+        vararg permissions: String,
+        listener: MPermissionListener
+    ) {
+        activity.checkAndAskPermission(permissions.filter { true }, listener)
+    }
 }
