@@ -21,8 +21,8 @@ apply plugin: "com.jfrog.bintray"
 def siteUrl = 'https://github.com/rmkrishna/MPermission'
 def gitUrl = 'https://github.com/rmkrishna/MPermission.git'
 
-group = "com.rmkrishna.permission"
-version = '0.0.1'
+group = "com.rmkrishna"
+version = '0.0.2'
 
 install {
     repositories.mavenInstaller {
