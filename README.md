@@ -14,39 +14,39 @@ implementation 'com.rmkrishna:permission:0.0.2'
 ### How to use
 
 ```Kotlin
-        askPermissions(MPermission.WRITE_CONTACTS) {
-            granted {
-                // If permission(or 's) granted successfully
-            }
+askPermissions(MPermission.WRITE_CONTACTS) {
+    granted {
+        // If permission(or 's) granted successfully
+    }
 
-            denied {
-                // If permission(or 's) denied by the user
-            }
+    denied {
+        // If permission(or 's) denied by the user
+    }
 
-            neverAskAgain {
-                // User selected the option for never ask again
-            }
-        }
+    neverAskAgain {
+        // User selected the option for never ask again
+    }
+}
 ```
 
 ``` Java
-        MPermission.askPermissions(MainJavaActivity.this, new String[]{MPermission.WRITE_CONTACTS}, new MPermissionListener() {
+MPermission.askPermissions(MainJavaActivity.this, new String[]{MPermission.WRITE_CONTACTS}, new MPermissionListener() {
 
-            @Override
-            public void neverAskAgain(@NotNull List<String> permissions) {
+    @Override
+    public void neverAskAgain(@NotNull List<String> permissions) {
 
-            }
+    }
 
-            @Override
-            public void denied(@NotNull List<String> permissions) {
-                // If the user denied the permission(or 's)
-            }
+    @Override
+    public void denied(@NotNull List<String> permissions) {
+        // If the user denied the permission(or 's)
+    }
 
-            @Override
-            public void granted() {
-                // If permission(or 's) granted successfully
-            }
-        });
+    @Override
+    public void granted() {
+        // If permission(or 's) granted successfully
+    }
+});
 ```
 
 
