@@ -21,16 +21,16 @@ apply plugin: "com.jfrog.bintray"
 def siteUrl = 'https://github.com/rmkrishna/MPermission'
 def gitUrl = 'https://github.com/rmkrishna/MPermission.git'
 
-group = "in.rmkrishna"
-version = '0.0.3'
+group = "com.rmkrishna.permission"
+version = '0.0.1'
 
 install {
     repositories.mavenInstaller {
         pom.project {
             packaging 'aar'
 
-            name 'mLog'
-            description 'Logging library for Android using Kotlin'
+            name 'MPermission'
+            description 'Easy way to get permission in Android'
 
             url siteUrl
 
@@ -99,3 +99,6 @@ if (project.rootProject.file("local.properties").exists()) {
         }
     }
 }
+
+// ./gradlew clean build install bintrayUpload - Command to upload in bintray
+// Ref https://ptyagicodecamp.github.io/how-did-i-publish-android-library-to-jcenter-from-android-studio.html
