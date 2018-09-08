@@ -13,6 +13,8 @@ implementation 'com.rmkrishna:permission:0.0.2'
 
 ### How to use
 
+#### In Korlin
+
 ```Kotlin
 askPermissions(MPermission.WRITE_CONTACTS) {
     granted {
@@ -28,6 +30,8 @@ askPermissions(MPermission.WRITE_CONTACTS) {
     }
 }
 ```
+
+#### In Java
 
 ``` Java
 MPermission.askPermissions(MainJavaActivity.this, new String[]{MPermission.WRITE_CONTACTS}, new MPermissionListener() {
