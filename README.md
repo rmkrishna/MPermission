@@ -13,7 +13,7 @@ implementation 'com.rmkrishna:permission:0.0.2'
 
 ### How to use
 
-#### In Korlin
+#### In Kotlin
 
 ```Kotlin
 askPermissions(MPermission.WRITE_CONTACTS) {
