@@ -21,6 +21,12 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.support.v4.content.ContextCompat
 
+/**
+ * Helper class for permission
+ * <p>
+ *      * To check the app has permissions(both single and multiple)
+ * </p>
+ */
 class PermissionHelper {
 
     companion object {
@@ -30,7 +36,7 @@ class PermissionHelper {
     /**
      * @param context
      * @param permissions
-     * @return
+     * @return true -> has permission, false otherwise
      */
     fun hasPermissions(context: Context, permissions: MutableList<String>): Boolean {
         permissions.forEach {
@@ -41,11 +47,10 @@ class PermissionHelper {
         return true
     }
 
-
     /**
      * @param context
      * @param permission
-     * @return
+     * @return true -> has permission, false otherwise
      */
     fun hasPermission(context: Context, permission: String) =
         (ContextCompat.checkSelfPermission(

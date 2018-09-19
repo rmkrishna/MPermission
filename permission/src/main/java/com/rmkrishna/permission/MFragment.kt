@@ -18,7 +18,6 @@
 package com.rmkrishna.permission
 
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.support.annotation.Nullable
 import android.support.v4.app.ActivityCompat
@@ -31,9 +30,16 @@ import android.view.ViewGroup
 private const val ARG_PERMISSIONS = "permissions"
 private const val PERMISSION_REQUEST_CODE = 4883
 
+/***
+ * Transparent Fragment help to get the permission and send back the result back to UI using callbacks
+ */
 class MFragment : Fragment() {
 
     init {
+        /**
+         * Control whether a fragment instance is retained across Activity re-creation
+         * Ref: https://developer.android.com/reference/android/app/Fragment.html#setRetainInstance(boolean)
+         */
         retainInstance = true
     }
 
@@ -48,7 +54,6 @@ class MFragment : Fragment() {
             bundle.getStringArrayList(ARG_PERMISSIONS)?.let {
                 permissions = it
             }
-
         }
     }
 
@@ -59,6 +64,9 @@ class MFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_m, container, false)
     }
 
+    /**
+     * To set the {@link MPermissionListener} to the fragment
+     */
     fun setListener(@Nullable listener: MPermissionListener): MFragment {
 
         this.listener = listener
@@ -69,8 +77,10 @@ class MFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        // Check for permissions and request the permissions
         if (permissions.size > 0) {
 
+            // Convert to array and send that to requestPermissions
             val permissionArray = arrayOfNulls<String>(permissions.size)
             permissions.toArray(permissionArray)
 
@@ -79,6 +89,7 @@ class MFragment : Fragment() {
             return
         }
 
+        // If there is no permission to get, just remove the fragment
         fragmentManager?.beginTransaction()?.remove(this)?.commitAllowingStateLoss()
     }
 
@@ -89,6 +100,7 @@ class MFragment : Fragment() {
     ) {
 
         if (requestCode == PERMISSION_REQUEST_CODE) {
+
             var grantedAllPermissions = true
 
             val neverAskAgainPermissionList = mutableListOf<String>()
@@ -96,6 +108,7 @@ class MFragment : Fragment() {
 
             permissions.forEachIndexed { index, permission ->
                 if (grantResults[index] == PackageManager.PERMISSION_DENIED) {
+                    // Some permissions are not granted
                     grantedAllPermissions = false
 
                     if (!ActivityCompat.shouldShowRequestPermissionRationale(
@@ -110,14 +123,14 @@ class MFragment : Fragment() {
                 }
             }
 
-            if (grantedAllPermissions) {
-                listener?.granted()
+            if (grantedAllPermissions) { //All permissions are granted
+                listener.granted()
             } else {
                 if (deniedPermissionList.isNotEmpty()) {
-                    listener?.denied(deniedPermissionList)
+                    listener.denied(deniedPermissionList)
                 }
                 if (neverAskAgainPermissionList.isNotEmpty()) {
-                    listener?.neverAskAgain(neverAskAgainPermissionList)
+                    listener.neverAskAgain(neverAskAgainPermissionList)
                 }
             }
 

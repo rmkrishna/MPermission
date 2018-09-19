@@ -24,7 +24,9 @@ import android.support.v7.app.AppCompatActivity
 
 private const val MFragment_TAG = "MFragment_TAG"
 
-
+/**
+ * To check the permission from AppCompatActivity
+ */
 fun AppCompatActivity.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
@@ -32,6 +34,9 @@ fun AppCompatActivity.askPermissions(
     checkAndAskPermission(permissions.filter { true }, getPermissionListener(listener))
 }
 
+/**
+ * To check the permission from Fragment
+ */
 fun Fragment.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
@@ -39,12 +44,13 @@ fun Fragment.askPermissions(
     activity!!.checkAndAskPermission(permissions.filter { true }, getPermissionListener(listener))
 }
 
+/**
+ * To check the permission from FragmentActivity
+ */
 private fun FragmentActivity.checkAndAskPermission(
     permissions: List<String>,
     listener: MPermissionListener
 ) {
-
-//    val permissionListener = getPermissionListener(listener)
 
     val notGrantedPermissions = permissions.filter { !hasPermission(it) }
 
@@ -54,6 +60,7 @@ private fun FragmentActivity.checkAndAskPermission(
         if (mFragment == null) {
             var fragment =
                 MFragment.newInstance(permissions = notGrantedPermissions as ArrayList<String>)
+
             fragment = fragment.setListener(listener)
 
             supportFragmentManager.beginTransaction().add(fragment, MFragment_TAG)
@@ -69,12 +76,24 @@ fun android.app.Activity.hasPermission(permission: String) =
 fun android.app.Activity.hasPermissions(permissions: MutableList<String>) =
     PermissionHelper.instance.hasPermissions(this, permissions)
 
+/**
+ * Permission listener to get the state of the permission
+ */
 interface MPermissionListener {
 
+    /**
+     * All the given permissions are granted for the application
+     */
     fun granted()
 
+    /**
+     * List of permissions are denied by the user for the application
+     */
     fun denied(permissions: List<String>)
 
+    /**
+     * List of permissions are denied and enable never asked by the user for the application
+     */
     fun neverAskAgain(permissions: List<String>)
 }
 
@@ -82,6 +101,7 @@ fun getPermissionListener(listener: PermissionListener.() -> Unit) =
     PermissionListener().apply { listener() }
 
 /**
+ *
  */
 class PermissionListener : MPermissionListener {
 
