@@ -15,11 +15,15 @@
  *     limitations under the License.
  */
 
-package com.rmkrishna.permission
+package com.rmkrishna.permissionX
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.rmkrishna.permission.MPermissionListener
+import com.rmkrishna.permission.PermissionListener
+import com.rmkrishna.permission.getPermissionListener
+import com.rmkrishna.permission.hasPermission
 
 private const val MFragment_TAG = "MFragment_TAG"
 
@@ -30,7 +34,9 @@ fun AppCompatActivity.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
-    checkAndAskPermission(permissions.filter { true }, getPermissionListener(listener))
+    checkAndAskPermission(permissions.filter { true },
+        getPermissionListener(listener)
+    )
 }
 
 /**
@@ -40,7 +46,9 @@ fun Fragment.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
-    activity!!.checkAndAskPermission(permissions.filter { true }, getPermissionListener(listener))
+    activity!!.checkAndAskPermission(permissions.filter { true },
+        getPermissionListener(listener)
+    )
 }
 
 /**
@@ -58,7 +66,7 @@ private fun FragmentActivity.checkAndAskPermission(
 
         if (mFragment == null) {
             var fragment =
-                com.rmkrishna.permission.MFragment.newInstance(permissions = notGrantedPermissions as ArrayList<String>)
+                MFragment.newInstance(permissions = notGrantedPermissions as ArrayList<String>)
 
             fragment = fragment.setListener(listener)
 
