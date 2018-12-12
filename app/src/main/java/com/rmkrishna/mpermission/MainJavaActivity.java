@@ -18,7 +18,6 @@
 package com.rmkrishna.mpermission;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,6 +27,8 @@ import com.rmkrishna.permission.MPermissionListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainJavaActivity extends AppCompatActivity {
 
@@ -44,9 +45,10 @@ public class MainJavaActivity extends AppCompatActivity {
 
                     @Override
                     public void neverAskAgain(@NotNull List<String> permissions) {
+
                         Toast.makeText(
                                 MainJavaActivity.this,
-                                "Permission granted Success!!",
+                                "Don't ask this permission, Pleaseeee",
                                 Toast.LENGTH_SHORT
                         ).show();
                     }
@@ -64,7 +66,7 @@ public class MainJavaActivity extends AppCompatActivity {
                     public void granted() {
                         Toast.makeText(
                                 MainJavaActivity.this,
-                                "Don't ask this permission, Pleaseeee",
+                                "Permission granted Success!!",
                                 Toast.LENGTH_SHORT
                         ).show();
                     }

@@ -18,9 +18,9 @@
 package com.rmkrishna.permission
 
 import android.Manifest
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 
 private const val MFragment_TAG = "MFragment_TAG"
 
@@ -64,7 +64,7 @@ private fun FragmentActivity.checkAndAskPermission(
             fragment = fragment.setListener(listener)
 
             supportFragmentManager.beginTransaction().add(fragment, MFragment_TAG)
-                .commitNowAllowingStateLoss()
+                .commitNow()
         }
     }
 }
