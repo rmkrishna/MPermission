@@ -19,8 +19,8 @@ package com.rmkrishna.mpermission
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.rmkrishna.permission.MPermission
 import com.rmkrishna.permission.askPermissions
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         askContactPermission.setOnClickListener {
-            askPermissions("android.permission.READ_CONTACTS") {
+            askPermissions(MPermission.WRITE_CONTACTS) {
                 granted {
                     Toast.makeText(
                         this@MainActivity,
@@ -63,7 +63,9 @@ class MainActivity : AppCompatActivity() {
 
         askMultiplePermission.setOnClickListener {
             askPermissions(
-                MPermission.WRITE_EXTERNAL_STORAGE
+                MPermission.WRITE_EXTERNAL_STORAGE,
+                MPermission.READ_EXTERNAL_STORAGE,
+                MPermission.CAMERA
             ) {
                 granted {
                     Toast.makeText(

@@ -29,7 +29,7 @@ install {
         pom.project {
             packaging 'aar'
 
-            name 'MPermission'
+            name 'MPermission-x'
             description 'Easy way to get permission in Android'
 
             url siteUrl
@@ -91,7 +91,7 @@ if (project.rootProject.file("local.properties").exists()) {
 
         pkg {
             repo = "rmkrishna"
-            name = "MPermission"
+            name = "MPermission-x"
             websiteUrl = siteUrl
             vcsUrl = gitUrl
             licenses = ["Apache-2.0"]

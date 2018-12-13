@@ -19,7 +19,7 @@ package com.rmkrishna.permission
 
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.core.content.ContextCompat
+import android.support.v4.content.ContextCompat
 
 /**
  * Helper class for permission
