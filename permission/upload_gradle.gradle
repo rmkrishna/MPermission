@@ -22,7 +22,7 @@ def siteUrl = 'https://github.com/rmkrishna/MPermission'
 def gitUrl = 'https://github.com/rmkrishna/MPermission.git'
 
 group = "com.rmkrishna"
-version = '1.3.3'
+version = '1.3.4'
 
 install {
     repositories.mavenInstaller {

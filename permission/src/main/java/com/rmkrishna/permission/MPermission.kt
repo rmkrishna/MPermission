@@ -64,7 +64,7 @@ private fun FragmentActivity.checkAndAskPermission(
             fragment = fragment.setListener(listener)
 
             supportFragmentManager.beginTransaction().add(fragment, MFragment_TAG)
-                .commitNowAllowingStateLoss()
+                .commitAllowingStateLoss()
         }
     }
 }

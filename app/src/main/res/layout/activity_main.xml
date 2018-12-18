@@ -41,5 +41,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Check in Java Activity" />
+    <Button
+        android:id="@+id/openFragmentSupportActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open Fragment support Activity" />
 
 </LinearLayout>

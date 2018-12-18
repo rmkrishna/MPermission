@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~
   ~  Copyright 2018 Muthukrishnan R
@@ -15,10 +16,16 @@
   ~     limitations under the License.
   -->
 
-<resources>
-    <string name="app_name">MPermission</string>
-    <string name="title_activity_main_java">MainJavaActivity</string>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SampleFragment">
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-</resources>
+    <Button
+        android:id="@+id/askMultiplePermission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Multiple Permission" />
+
+</FrameLayout>

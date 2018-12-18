@@ -17,49 +17,30 @@
 
 package com.rmkrishna.mpermission
 
-import android.content.Intent
+
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import com.rmkrishna.permission.MPermission
 import com.rmkrishna.permission.askPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+class SampleFragment : Fragment() {
 
-        setContentView(R.layout.activity_main)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_sample, container, false)
+    }
 
-        askContactPermission.setOnClickListener {
-            askPermissions(MPermission.WRITE_CONTACTS) {
-                granted {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Permission granted Success!!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                denied {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Permission Denied by user",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
-
-                neverAskAgain {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Don't ask this permission, Pleaseeee",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         askMultiplePermission.setOnClickListener {
             askPermissions(
@@ -69,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             ) {
                 granted {
                     Toast.makeText(
-                        this@MainActivity,
+                        activity!!,
                         "Permission granted Success!!",
                         Toast.LENGTH_SHORT
                     ).show()
@@ -77,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
                 denied {
                     Toast.makeText(
-                        this@MainActivity,
+                        activity!!,
                         "Permission Denied by user",
                         Toast.LENGTH_SHORT
                     )
@@ -86,29 +67,13 @@ class MainActivity : AppCompatActivity() {
 
                 neverAskAgain {
                     Toast.makeText(
-                        this@MainActivity,
+                        activity!!,
                         "Don't ask this permission, Pleaseeee",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
         }
-
-        openJavaActivity.setOnClickListener {
-            startActivity(
-                Intent(
-                    this@MainActivity,
-                    MainJavaActivity::class.java
-                )
-            )
-        }
-        openFragmentSupportActivity.setOnClickListener {
-            startActivity(
-                Intent(
-                    this@MainActivity,
-                    FragmentSupportActivity::class.java
-                )
-            )
-        }
     }
+
 }
