@@ -122,6 +122,7 @@ class MFragment : Fragment() {
                     }
                 }
             }
+            fragmentManager?.beginTransaction()?.remove(this)?.commitAllowingStateLoss()
 
             if (grantedAllPermissions) { //All permissions are granted
                 listener.granted()
@@ -134,7 +135,6 @@ class MFragment : Fragment() {
                 }
             }
 
-            fragmentManager?.beginTransaction()?.remove(this)?.commitAllowingStateLoss()
         }
     }
 
