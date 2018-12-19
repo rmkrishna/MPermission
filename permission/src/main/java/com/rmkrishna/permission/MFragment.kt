@@ -122,7 +122,7 @@ class MFragment : Fragment() {
                     }
                 }
             }
-            fragmentManager?.beginTransaction()?.remove(this)?.commitAllowingStateLoss()
+
 
             if (grantedAllPermissions) { //All permissions are granted
                 listener.granted()
@@ -133,6 +133,11 @@ class MFragment : Fragment() {
                 if (neverAskAgainPermissionList.isNotEmpty()) {
                     listener.neverAskAgain(neverAskAgainPermissionList)
                 }
+            }
+            try {
+                fragmentManager?.beginTransaction()?.remove(this)?.commitAllowingStateLoss()
+            } catch (e: Exception) {
+                // Just ignore if its getting error
             }
 
         }
