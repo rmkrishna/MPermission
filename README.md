@@ -9,7 +9,7 @@ Easy way to handle permissions in Android, Which support both Kotlin and Java
 ### Dependency
 ```groovy
 implementation 'com.rmkrishna:permission:1.3.11' 
-implementation 'com.rmkrishna:permission-x:1.3.11' - // For AndroidX
+implementation 'com.rmkrishna:permission-x:1.3.11' // For AndroidX
 ```
 
 ### How to use
