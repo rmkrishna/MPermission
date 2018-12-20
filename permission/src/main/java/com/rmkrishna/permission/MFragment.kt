@@ -40,7 +40,7 @@ class MFragment : Fragment() {
          * Control whether a fragment instance is retained across Activity re-creation
          * Ref: https://developer.android.com/reference/android/app/Fragment.html#setRetainInstance(boolean)
          */
-        retainInstance = true
+//        retainInstance = true
     }
 
     private var permissions: ArrayList<String> = arrayListOf()
