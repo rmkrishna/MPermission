@@ -41,7 +41,12 @@ fun Fragment.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
-    activity!!.checkAndAskPermission(permissions.filter { true }, getPermissionListener(listener))
+    activity?.let {
+        it.checkAndAskPermission(
+            permissions.filter { true },
+            getPermissionListener(listener)
+        )
+    }
 }
 
 /**

@@ -34,7 +34,8 @@ fun AppCompatActivity.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
-    checkAndAskPermission(permissions.filter { true },
+    checkAndAskPermission(
+        permissions.filter { true },
         getPermissionListener(listener)
     )
 }
@@ -46,7 +47,8 @@ fun Fragment.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
-    activity!!.checkAndAskPermission(permissions.filter { true },
+    activity!!.checkAndAskPermission(
+        permissions.filter { true },
         getPermissionListener(listener)
     )
 }
