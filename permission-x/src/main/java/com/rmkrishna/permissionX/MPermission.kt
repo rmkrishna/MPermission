@@ -17,16 +17,16 @@
 
 package com.rmkrishna.permissionX
 
+import android.content.Context
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.rmkrishna.permission.MPermissionListener
 import com.rmkrishna.permission.PermissionListener
-import com.rmkrishna.permission.getPermissionListener
-import com.rmkrishna.permission.hasPermission
 
 private const val MFragment_TAG = "MFragment_TAG"
-
 /**
  * To check the permission from AppCompatActivity
  */
@@ -53,6 +53,21 @@ fun Fragment.askPermissions(
     )
 }
 
+
+private fun getPermissionListener(listener: PermissionListener.() -> Unit) =
+    PermissionListener().apply { listener() }
+
+/**
+ * @param context
+ * @param permission
+ * @return true -> has permission, false otherwise
+ */
+private fun hasPermission(context: Context, permission: String) =
+    (ContextCompat.checkSelfPermission(
+        context,
+        permission
+    ) == PackageManager.PERMISSION_GRANTED)
+
 /**
  * To check the permission from FragmentActivity
  */
@@ -60,16 +75,13 @@ private fun FragmentActivity.checkAndAskPermission(
     permissions: List<String>,
     listener: MPermissionListener
 ) {
-
-    val notGrantedPermissions = permissions.filter { !hasPermission(it) }
-
+    val notGrantedPermissions = permissions.filter { !hasPermission(this, it) }
     if (notGrantedPermissions.isEmpty()) listener.granted() else {
         val mFragment = supportFragmentManager.findFragmentByTag(MFragment_TAG)
 
         if (mFragment == null) {
             var fragment =
                 MFragment.newInstance(permissions = notGrantedPermissions as ArrayList<String>)
-
             fragment = fragment.setListener(listener)
 
             supportFragmentManager.beginTransaction().add(
@@ -78,5 +90,19 @@ private fun FragmentActivity.checkAndAskPermission(
             )
                 .commitNowAllowingStateLoss()
         }
+    }
+}
+
+/**
+ *  To support AndroidX Java
+ */
+object MPermission {
+    @JvmStatic
+    fun askPermissions(
+        activity: FragmentActivity,
+        vararg permissions: String,
+        listener: MPermissionListener
+    ) {
+        activity.checkAndAskPermission(permissions.filter { true }, listener)
     }
 }

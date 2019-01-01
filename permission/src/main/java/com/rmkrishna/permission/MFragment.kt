@@ -33,26 +33,15 @@ private const val PERMISSION_REQUEST_CODE = 4883
 /***
  * Transparent Fragment help to get the permission and send back the result back to UI using callbacks
  */
-class MFragment : Fragment() {
-
-    init {
-        /**
-         * Control whether a fragment instance is retained across Activity re-creation
-         * Ref: https://developer.android.com/reference/android/app/Fragment.html#setRetainInstance(boolean)
-         */
-//        retainInstance = true
-    }
-
-    private var permissions: ArrayList<String> = arrayListOf()
-
+internal class MFragment : Fragment() {
+    private val permissions: ArrayList<String> = arrayListOf()
     private lateinit var listener: MPermissionListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         arguments?.let { bundle ->
             bundle.getStringArrayList(ARG_PERMISSIONS)?.let {
-                permissions = it
+                permissions.addAll(it)
             }
         }
     }
@@ -68,27 +57,21 @@ class MFragment : Fragment() {
      * To set the {@link MPermissionListener} to the fragment
      */
     fun setListener(@Nullable listener: MPermissionListener): MFragment {
-
         this.listener = listener
-
         return this
     }
 
     override fun onResume() {
         super.onResume()
-
         // Check for permissions and request the permissions
         if (permissions.size > 0) {
-
             // Convert to array and send that to requestPermissions
             val permissionArray = arrayOfNulls<String>(permissions.size)
             permissions.toArray(permissionArray)
 
             requestPermissions(permissionArray, PERMISSION_REQUEST_CODE)
-
             return
         }
-
         // If there is no permission to get, just remove the fragment
         fragmentManager?.beginTransaction()?.remove(this)?.commitAllowingStateLoss()
     }
@@ -98,11 +81,8 @@ class MFragment : Fragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-
         if (requestCode == PERMISSION_REQUEST_CODE) {
-
             var grantedAllPermissions = true
-
             val neverAskAgainPermissionList = mutableListOf<String>()
             val deniedPermissionList = arrayListOf<String>()
 
@@ -123,7 +103,6 @@ class MFragment : Fragment() {
                 }
             }
 
-
             if (grantedAllPermissions) { //All permissions are granted
                 listener.granted()
             } else {
@@ -134,17 +113,16 @@ class MFragment : Fragment() {
                     listener.neverAskAgain(neverAskAgainPermissionList)
                 }
             }
+
             try {
                 fragmentManager?.beginTransaction()?.remove(this)?.commitAllowingStateLoss()
             } catch (e: Exception) {
                 // Just ignore if its getting error
             }
-
         }
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance(permissions: ArrayList<String>) =
             MFragment().apply {

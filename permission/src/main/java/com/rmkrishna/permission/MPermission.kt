@@ -18,8 +18,11 @@
 package com.rmkrishna.permission
 
 import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 
 private const val MFragment_TAG = "MFragment_TAG"
@@ -43,8 +46,7 @@ fun Fragment.askPermissions(
 ) {
     activity?.let {
         it.checkAndAskPermission(
-            permissions.filter { true },
-            getPermissionListener(listener)
+            permissions.filter { true }, getPermissionListener(listener)
         )
     }
 }
@@ -56,8 +58,7 @@ private fun FragmentActivity.checkAndAskPermission(
     permissions: List<String>,
     listener: MPermissionListener
 ) {
-
-    val notGrantedPermissions = permissions.filter { !hasPermission(it) }
+    val notGrantedPermissions = permissions.filter { !hasPermission(this, it) }
 
     if (notGrantedPermissions.isEmpty()) listener.granted() else {
         val mFragment = supportFragmentManager.findFragmentByTag(MFragment_TAG)
@@ -65,7 +66,6 @@ private fun FragmentActivity.checkAndAskPermission(
         if (mFragment == null) {
             var fragment =
                 MFragment.newInstance(permissions = notGrantedPermissions as ArrayList<String>)
-
             fragment = fragment.setListener(listener)
 
             supportFragmentManager.beginTransaction().add(fragment, MFragment_TAG)
@@ -75,17 +75,21 @@ private fun FragmentActivity.checkAndAskPermission(
 }
 
 
-fun android.app.Activity.hasPermission(permission: String) =
-    PermissionHelper.instance.hasPermission(this, permission)
-
-fun android.app.Activity.hasPermissions(permissions: MutableList<String>) =
-    PermissionHelper.instance.hasPermissions(this, permissions)
+/**
+ * @param context
+ * @param permission
+ * @return true -> has permission, false otherwise
+ */
+private fun hasPermission(context: Context, permission: String) =
+    (ContextCompat.checkSelfPermission(
+        context,
+        permission
+    ) == PackageManager.PERMISSION_GRANTED)
 
 /**
  * Permission listener to get the state of the permission
  */
 interface MPermissionListener {
-
     /**
      * All the given permissions are granted for the application
      */
@@ -102,14 +106,13 @@ interface MPermissionListener {
     fun neverAskAgain(permissions: List<String>)
 }
 
-fun getPermissionListener(listener: PermissionListener.() -> Unit) =
+private fun getPermissionListener(listener: PermissionListener.() -> Unit) =
     PermissionListener().apply { listener() }
 
 /**
  *
  */
 class PermissionListener : MPermissionListener {
-
     private var mGranted: () -> Unit = {}
     private var mDenied: (permissions: List<String>) -> Unit = {}
     private var mNeverAskAgain: (permissions: List<String>) -> Unit = {}
@@ -137,7 +140,6 @@ class PermissionListener : MPermissionListener {
     override fun neverAskAgain(permissions: List<String>) {
         mNeverAskAgain.invoke(permissions)
     }
-
 }
 
 /**
