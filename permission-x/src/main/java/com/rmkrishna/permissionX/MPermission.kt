@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.rmkrishna.permission.MPermissionListener
 import com.rmkrishna.permission.PermissionListener
+import com.rmkrishna.permission.getPermissionListener
 
 private const val MFragment_TAG = "MFragment_TAG"
 /**
@@ -52,10 +53,6 @@ fun Fragment.askPermissions(
         getPermissionListener(listener)
     )
 }
-
-
-private fun getPermissionListener(listener: PermissionListener.() -> Unit) =
-    PermissionListener().apply { listener() }
 
 /**
  * @param context

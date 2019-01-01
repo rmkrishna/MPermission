@@ -24,8 +24,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.rmkrishna.permission.MPermission
 import com.rmkrishna.permission.askPermissions
+import com.rmkrishna.permission.MHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -35,7 +35,6 @@ class SampleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sample, container, false)
     }
 
@@ -44,9 +43,9 @@ class SampleFragment : Fragment() {
 
         askMultiplePermission.setOnClickListener {
             askPermissions(
-                MPermission.WRITE_EXTERNAL_STORAGE,
-                MPermission.READ_EXTERNAL_STORAGE,
-                MPermission.CAMERA
+                MHelper.WRITE_EXTERNAL_STORAGE,
+                MHelper.READ_EXTERNAL_STORAGE,
+                MHelper.CAMERA
             ) {
                 granted {
                     Toast.makeText(

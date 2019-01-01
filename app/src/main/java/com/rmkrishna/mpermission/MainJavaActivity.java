@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.rmkrishna.permission.MPermission;
+import com.rmkrishna.permission.MHelper;
 import com.rmkrishna.permission.MPermissionListener;
 
 import org.jetbrains.annotations.NotNull;
@@ -40,13 +41,13 @@ public class MainJavaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                MPermission.askPermissions(MainJavaActivity.this, new String[]{MPermission.WRITE_CONTACTS}, new MPermissionListener() {
+                MPermission.askPermissions(MainJavaActivity.this, new String[]{MHelper.WRITE_CONTACTS}, new MPermissionListener() {
 
                     @Override
                     public void neverAskAgain(@NotNull List<String> permissions) {
                         Toast.makeText(
                                 MainJavaActivity.this,
-                                "Permission granted Success!!",
+                                "Don't ask this permission, Pleaseeee",
                                 Toast.LENGTH_SHORT
                         ).show();
                     }
@@ -64,7 +65,7 @@ public class MainJavaActivity extends AppCompatActivity {
                     public void granted() {
                         Toast.makeText(
                                 MainJavaActivity.this,
-                                "Don't ask this permission, Pleaseeee",
+                                "Permission granted Success!!",
                                 Toast.LENGTH_SHORT
                         ).show();
                     }
