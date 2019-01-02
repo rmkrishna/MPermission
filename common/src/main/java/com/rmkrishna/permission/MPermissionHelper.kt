@@ -75,33 +75,4 @@ open class PermissionListener : MPermissionListener {
     }
 }
 
-object MHelper {
-    const val CAMERA = Manifest.permission.CAMERA
-
-    const val READ_CALENDAR = Manifest.permission.READ_CALENDAR
-    const val WRITE_CALENDAR = Manifest.permission.WRITE_CALENDAR
-
-    const val READ_CONTACTS = Manifest.permission.READ_CONTACTS
-    const val WRITE_CONTACTS = Manifest.permission.WRITE_CONTACTS
-
-    const val GET_ACCOUNTS = Manifest.permission.GET_ACCOUNTS
-
-    const val ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
-    const val ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION
-
-    const val RECORD_AUDIO = Manifest.permission.RECORD_AUDIO
-
-    const val READ_PHONE_STATE = Manifest.permission.READ_PHONE_STATE
-
-    const val CALL_PHONE = Manifest.permission.CALL_PHONE
-    const val PROCESS_OUTGOING_CALLS = Manifest.permission.PROCESS_OUTGOING_CALLS
-
-    const val ADD_VOICEMAIL = Manifest.permission.ADD_VOICEMAIL
-
-    const val SEND_SMS = Manifest.permission.SEND_SMS
-    const val RECEIVE_SMS = Manifest.permission.RECEIVE_SMS
-    const val READ_SMS = Manifest.permission.READ_SMS
-
-    const val READ_EXTERNAL_STORAGE = Manifest.permission.READ_EXTERNAL_STORAGE
-    const val WRITE_EXTERNAL_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE
-}
+typealias MHelper = Manifest.permission
