@@ -25,8 +25,6 @@ import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.rmkrishna.permission.MPermissionListener
-
 
 private const val ARG_PERMISSIONS = "permissions"
 private const val PERMISSION_REQUEST_CODE = 4883
