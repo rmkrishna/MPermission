@@ -92,58 +92,58 @@ private const val deprecatedMessage = "Instead of this try to use MHelper"
  */
 object MPermission {
     @Deprecated(deprecatedMessage)
-    const val CAMERA = Manifest.permission.CAMERA
+    const val CAMERA = MHelper.CAMERA
 
     @Deprecated(deprecatedMessage)
-    const val READ_CALENDAR = Manifest.permission.READ_CALENDAR
+    const val READ_CALENDAR = MHelper.READ_CALENDAR
 
     @Deprecated(deprecatedMessage)
-    const val WRITE_CALENDAR = Manifest.permission.WRITE_CALENDAR
+    const val WRITE_CALENDAR = MHelper.WRITE_CALENDAR
 
     @Deprecated(deprecatedMessage)
-    const val READ_CONTACTS = Manifest.permission.READ_CONTACTS
+    const val READ_CONTACTS = MHelper.READ_CONTACTS
 
     @Deprecated(deprecatedMessage)
-    const val WRITE_CONTACTS = Manifest.permission.WRITE_CONTACTS
+    const val WRITE_CONTACTS = MHelper.WRITE_CONTACTS
 
     @Deprecated(deprecatedMessage)
-    const val GET_ACCOUNTS = Manifest.permission.GET_ACCOUNTS
+    const val GET_ACCOUNTS = MHelper.GET_ACCOUNTS
 
     @Deprecated(deprecatedMessage)
-    const val ACCESS_FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
+    const val ACCESS_FINE_LOCATION = MHelper.ACCESS_FINE_LOCATION
 
     @Deprecated(deprecatedMessage)
-    const val ACCESS_COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION
+    const val ACCESS_COARSE_LOCATION = MHelper.ACCESS_COARSE_LOCATION
 
     @Deprecated(deprecatedMessage)
-    const val RECORD_AUDIO = Manifest.permission.RECORD_AUDIO
+    const val RECORD_AUDIO = MHelper.RECORD_AUDIO
 
     @Deprecated(deprecatedMessage)
-    const val READ_PHONE_STATE = Manifest.permission.READ_PHONE_STATE
+    const val READ_PHONE_STATE = MHelper.READ_PHONE_STATE
 
     @Deprecated(deprecatedMessage)
-    const val CALL_PHONE = Manifest.permission.CALL_PHONE
+    const val CALL_PHONE = MHelper.CALL_PHONE
 
     @Deprecated(deprecatedMessage)
-    const val PROCESS_OUTGOING_CALLS = Manifest.permission.PROCESS_OUTGOING_CALLS
+    const val PROCESS_OUTGOING_CALLS = MHelper.PROCESS_OUTGOING_CALLS
 
     @Deprecated(deprecatedMessage)
-    const val ADD_VOICEMAIL = Manifest.permission.ADD_VOICEMAIL
+    const val ADD_VOICEMAIL = MHelper.ADD_VOICEMAIL
 
     @Deprecated(deprecatedMessage)
-    const val SEND_SMS = Manifest.permission.SEND_SMS
+    const val SEND_SMS = MHelper.SEND_SMS
 
     @Deprecated(deprecatedMessage)
-    const val RECEIVE_SMS = Manifest.permission.RECEIVE_SMS
+    const val RECEIVE_SMS = MHelper.RECEIVE_SMS
 
     @Deprecated(deprecatedMessage)
-    const val READ_SMS = Manifest.permission.READ_SMS
+    const val READ_SMS = MHelper.READ_SMS
 
     @Deprecated(deprecatedMessage)
-    const val READ_EXTERNAL_STORAGE = Manifest.permission.READ_EXTERNAL_STORAGE
+    const val READ_EXTERNAL_STORAGE = MHelper.READ_EXTERNAL_STORAGE
 
     @Deprecated(deprecatedMessage)
-    const val WRITE_EXTERNAL_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE
+    const val WRITE_EXTERNAL_STORAGE = MHelper.WRITE_EXTERNAL_STORAGE
 
     @JvmStatic
     fun askPermissions(
@@ -153,4 +153,8 @@ object MPermission {
     ) {
         activity.checkAndAskPermission(permissions.filter { true }, listener)
     }
+
+
+    @JvmStatic
+    fun get() = MHelper()
 }
