@@ -2,14 +2,14 @@
 Easy way to handle permissions in Android, Which support both Kotlin and Java
 
 
-[ ![Download](https://api.bintray.com/packages/rmkrishna/rmkrishna/MPermission/images/download.svg?version=1.3.11) ](https://bintray.com/rmkrishna/rmkrishna/MPermission/1.3.11/link) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/rmkrishna/MLog-Kotlin/blob/master/LICENSE)
+[ ![Download](https://api.bintray.com/packages/rmkrishna/rmkrishna/MPermission/images/download.svg?version=1.3.20) ](https://bintray.com/rmkrishna/rmkrishna/MPermission/1.3.20/link) [![Apache License V.2](https://img.shields.io/badge/license-Apache%20V.2-blue.svg)](https://github.com/rmkrishna/MLog-Kotlin/blob/master/LICENSE)
 
 
 ## Usage
 ### Dependency
 ```groovy
-implementation 'com.rmkrishna:permission:1.3.11' 
-implementation 'com.rmkrishna:permission-x:1.3.11' // For AndroidX
+implementation 'com.rmkrishna:permission:1.3.20' 
+implementation 'com.rmkrishna:permission-x:1.3.20' // For AndroidX
 ```
 
 ### How to use
@@ -17,7 +17,7 @@ implementation 'com.rmkrishna:permission-x:1.3.11' // For AndroidX
 #### In Kotlin
 
 ```Kotlin
-askPermissions(MPermission.WRITE_CONTACTS) {
+askPermissions(MHelper.WRITE_CONTACTS) {
     granted {
         // If permission(or 's) granted successfully
     }
