@@ -17,7 +17,7 @@ implementation 'com.rmkrishna:permission-x:1.3.21' // For AndroidX
 #### In Kotlin
 
 ```Kotlin
-askPermissions(MHelper.WRITE_CONTACTS) {
+askPermissions(MHelper.WRITE_CONTACTS, MHelper.READ_CONTACTS) {
     granted {
         // If permission(or 's) granted successfully
     }
