@@ -23,14 +23,13 @@ import android.content.pm.PackageManager
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 
 private const val MFragment_TAG = "MFragment_TAG"
 
 /**
- * To check and get the permission from AppCompatActivity
+ * To check and get the permission from FragmentActivity
  */
-fun AppCompatActivity.askPermissions(
+fun FragmentActivity.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
@@ -38,14 +37,21 @@ fun AppCompatActivity.askPermissions(
 }
 
 /**
- * To check and get the permission from AppCompatActivity
+ * To check a single permission and not expecting any result from AppCompatActivity
  */
-infix fun AppCompatActivity.getPermission(permission: String) {
+infix fun FragmentActivity.getPermission(permission: String) {
     checkAndAskPermission(arrayListOf(permission), null)
 }
 
 /**
- * To check a single permission and not expecting any result back
+ * To check a single permission and not expecting any result from Fragment
+ */
+infix fun Fragment.getPermission(permission: String) {
+    activity?.checkAndAskPermission(arrayListOf(permission), null)
+}
+
+/**
+ * To check and get the permission from Fragment
  */
 fun Fragment.askPermissions(
     vararg permissions: String,
@@ -57,7 +63,6 @@ fun Fragment.askPermissions(
         )
     }
 }
-
 
 /**
  * To check and get the permission from FragmentActivity

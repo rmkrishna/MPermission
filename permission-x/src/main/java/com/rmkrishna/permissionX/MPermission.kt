@@ -20,7 +20,6 @@ package com.rmkrishna.permissionX
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -29,7 +28,7 @@ private const val MFragment_TAG = "MFragment_TAG"
 /**
  * To check and get the permission from AppCompatActivity
  */
-fun AppCompatActivity.askPermissions(
+fun FragmentActivity.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
@@ -46,19 +45,24 @@ fun Fragment.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
-    activity!!.checkAndAskPermission(
+    activity?.checkAndAskPermission(
         permissions.filter { true },
         getPermissionListener(listener)
     )
 }
 
 /**
- * To check a single permission and not expecting any result back
+ * To check a single permission and not expecting any result back from Fragment
  */
 infix fun Fragment.getPermission(permission: String) {
-    activity!!.checkAndAskPermission(
-        arrayListOf(permission), null
-    )
+    activity?.checkAndAskPermission(arrayListOf(permission), null)
+}
+
+/**
+ * To check a single permission and not expecting any result back from Activity
+ */
+infix fun FragmentActivity.getPermission(permission: String) {
+    checkAndAskPermission(arrayListOf(permission), null)
 }
 
 /**
