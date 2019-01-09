@@ -23,6 +23,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.rmkrishna.permission.MHelper
 import com.rmkrishna.permission.askPermissions
+import com.rmkrishna.permission.getPermission
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        // To get single permission and not expecting any result in a stylish way
+        this getPermission MHelper.READ_CONTACTS
 
         askContactPermission.setOnClickListener {
             askPermissions(MHelper.WRITE_CONTACTS) {

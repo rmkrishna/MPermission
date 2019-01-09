@@ -34,7 +34,7 @@ private const val PERMISSION_REQUEST_CODE = 4883
  */
 internal class MFragment : Fragment() {
     private val permissions: ArrayList<String> = arrayListOf()
-    private lateinit var listener: MPermissionListener
+    private var listener: MPermissionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +55,7 @@ internal class MFragment : Fragment() {
     /**
      * To set the {@link MPermissionListener} to the fragment
      */
-    fun setListener(@Nullable listener: MPermissionListener): MFragment {
+    fun setListener(@Nullable listener: MPermissionListener?): MFragment {
         this.listener = listener
         return this
     }
@@ -102,13 +102,13 @@ internal class MFragment : Fragment() {
             }
 
             if (grantedAllPermissions) { //All permissions are granted
-                listener.granted()
+                listener?.granted()
             } else {
                 if (deniedPermissionList.isNotEmpty()) {
-                    listener.denied(deniedPermissionList)
+                    listener?.denied(deniedPermissionList)
                 }
                 if (neverAskAgainPermissionList.isNotEmpty()) {
-                    listener.neverAskAgain(neverAskAgainPermissionList)
+                    listener?.neverAskAgain(neverAskAgainPermissionList)
                 }
             }
 

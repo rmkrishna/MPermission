@@ -27,7 +27,7 @@ import androidx.fragment.app.FragmentActivity
 
 private const val MFragment_TAG = "MFragment_TAG"
 /**
- * To check the permission from AppCompatActivity
+ * To check and get the permission from AppCompatActivity
  */
 fun AppCompatActivity.askPermissions(
     vararg permissions: String,
@@ -40,7 +40,7 @@ fun AppCompatActivity.askPermissions(
 }
 
 /**
- * To check the permission from Fragment
+ * To check and get the permission from Fragment
  */
 fun Fragment.askPermissions(
     vararg permissions: String,
@@ -49,6 +49,15 @@ fun Fragment.askPermissions(
     activity!!.checkAndAskPermission(
         permissions.filter { true },
         getPermissionListener(listener)
+    )
+}
+
+/**
+ * To check a single permission and not expecting any result back
+ */
+infix fun Fragment.getPermission(permission: String) {
+    activity!!.checkAndAskPermission(
+        arrayListOf(permission), null
     )
 }
 
@@ -68,10 +77,10 @@ private fun hasPermission(context: Context, permission: String) =
  */
 private fun FragmentActivity.checkAndAskPermission(
     permissions: List<String>,
-    listener: MPermissionListener
+    listener: MPermissionListener?
 ) {
     val notGrantedPermissions = permissions.filter { !hasPermission(this, it) }
-    if (notGrantedPermissions.isEmpty()) listener.granted() else {
+    if (notGrantedPermissions.isEmpty()) listener?.granted() else {
         val mFragment = supportFragmentManager.findFragmentByTag(MFragment_TAG)
 
         if (mFragment == null) {
