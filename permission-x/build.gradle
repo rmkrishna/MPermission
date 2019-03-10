@@ -33,7 +33,6 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -43,7 +42,7 @@ dependencies {
     /*================================= Kotlin Lib =================================*/
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     /*================================= AndroidX support Lib =================================*/
-    api 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    api 'androidx.appcompat:appcompat:1.1.0-alpha02'
 }
 
 apply from: 'upload_gradle.gradle'
