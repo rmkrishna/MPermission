@@ -105,7 +105,7 @@ private fun FragmentActivity.checkAndAskPermission(
  *  To support AndroidX Java
  */
 object MPermission {
-    
+
     @JvmStatic
     fun askPermissions(
         activity: FragmentActivity,
@@ -120,6 +120,7 @@ object MPermission {
 }
 
 typealias MHelper = Manifest.permission
+typealias MHelperGroup = Manifest.permission_group
 
 /**
  * Permission listener to get the state of the permission
