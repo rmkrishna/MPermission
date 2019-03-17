@@ -105,6 +105,7 @@ private fun FragmentActivity.checkAndAskPermission(
  *  To support AndroidX Java
  */
 object MPermission {
+    
     @JvmStatic
     fun askPermissions(
         activity: FragmentActivity,
