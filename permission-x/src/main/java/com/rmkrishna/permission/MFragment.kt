@@ -15,7 +15,7 @@
  *     limitations under the License.
  */
 
-package com.rmkrishna.permissionX
+package com.rmkrishna.permission
 
 import android.content.pm.PackageManager
 import android.os.Bundle

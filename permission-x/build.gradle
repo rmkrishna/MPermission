@@ -43,6 +43,8 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     /*================================= AndroidX support Lib =================================*/
     api 'androidx.appcompat:appcompat:1.1.0-alpha02'
+    /*================================= Base Permission Lib =================================*/
+    api project(':permission-core')
 }
 
-apply from: 'upload_gradle.gradle'
+apply from: rootProject.file('upload_gradle.gradle')

@@ -17,7 +17,6 @@
 
 package com.rmkrishna.permission
 
-import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.support.v4.app.Fragment
@@ -99,6 +98,7 @@ private fun hasPermission(context: Context, permission: String) =
     ) == PackageManager.PERMISSION_GRANTED)
 
 object MPermission {
+
     @JvmStatic
     fun askPermissions(
         activity: FragmentActivity,
@@ -111,62 +111,4 @@ object MPermission {
 
     @JvmStatic
     fun get() = MHelper()
-}
-
-typealias MHelper = Manifest.permission
-
-/**
- * Permission listener to get the state of the permission
- */
-interface MPermissionListener {
-    /**
-     * All the given permissions are granted for the application
-     */
-    fun granted()
-
-    /**
-     * List of permissions are denied by the user for the application
-     */
-    fun denied(permissions: List<String>)
-
-    /**
-     * List of permissions are denied and enable never asked by the user for the application
-     */
-    fun neverAskAgain(permissions: List<String>)
-}
-
-fun getPermissionListener(listener: PermissionListener.() -> Unit) =
-    PermissionListener().apply { listener() }
-
-/**
- *
- */
-open class PermissionListener : MPermissionListener {
-    private var mGranted: () -> Unit = {}
-    private var mDenied: (permissions: List<String>) -> Unit = {}
-    private var mNeverAskAgain: (permissions: List<String>) -> Unit = {}
-
-    fun granted(func: () -> Unit) {
-        mGranted = func
-    }
-
-    fun denied(func: (permissions: List<String>) -> Unit) {
-        mDenied = func
-    }
-
-    fun neverAskAgain(func: (permissions: List<String>) -> Unit) {
-        mNeverAskAgain = func
-    }
-
-    override fun granted() {
-        mGranted.invoke()
-    }
-
-    override fun denied(permissions: List<String>) {
-        mDenied.invoke(permissions)
-    }
-
-    override fun neverAskAgain(permissions: List<String>) {
-        mNeverAskAgain.invoke(permissions)
-    }
 }

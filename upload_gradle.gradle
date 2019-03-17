@@ -22,14 +22,16 @@ def siteUrl = 'https://github.com/rmkrishna/MPermission'
 def gitUrl = 'https://github.com/rmkrishna/MPermission.git'
 
 group = "com.rmkrishna"
-version = '1.3.34'
+version = '1.3.38'
 
 install {
     repositories.mavenInstaller {
         pom.project {
             packaging 'aar'
 
-            name 'MPermission-x'
+            artifactId = ARTIFACT_ID
+
+            name NAME
             description 'Easy way to get permission in Android'
 
             url siteUrl
@@ -91,7 +93,7 @@ if (project.rootProject.file("local.properties").exists()) {
 
         pkg {
             repo = "rmkrishna"
-            name = "MPermission-x"
+            name = NAME
             websiteUrl = siteUrl
             vcsUrl = gitUrl
             licenses = ["Apache-2.0"]

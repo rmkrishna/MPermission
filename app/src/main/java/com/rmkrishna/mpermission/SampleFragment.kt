@@ -24,8 +24,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.rmkrishna.permission.MHelper
 import com.rmkrishna.permission.askPermissions
+import com.rmkrishna.permission.MHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 
