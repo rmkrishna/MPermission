@@ -60,11 +60,9 @@ open class PermissionListener : MPermissionListener {
     fun granted(func: () -> Unit) {
         mGranted = func
     }
-
     fun denied(func: (permissions: List<String>) -> Unit) {
         mDenied = func
     }
-
     fun neverAskAgain(func: (permissions: List<String>) -> Unit) {
         mNeverAskAgain = func
     }
@@ -72,11 +70,9 @@ open class PermissionListener : MPermissionListener {
     override fun granted() {
         mGranted.invoke()
     }
-
     override fun denied(permissions: List<String>) {
         mDenied.invoke(permissions)
     }
-
     override fun neverAskAgain(permissions: List<String>) {
         mNeverAskAgain.invoke(permissions)
     }

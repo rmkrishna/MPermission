@@ -98,7 +98,6 @@ private fun hasPermission(context: Context, permission: String) =
     ) == PackageManager.PERMISSION_GRANTED)
 
 object MPermission {
-
     @JvmStatic
     fun askPermissions(
         activity: FragmentActivity,
