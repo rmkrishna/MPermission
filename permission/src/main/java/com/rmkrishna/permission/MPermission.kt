@@ -108,7 +108,6 @@ object MPermission {
         activity.checkAndAskPermission(permissions.filter { true }, listener)
     }
 
-
     @JvmStatic
     fun get() = MHelper()
 }

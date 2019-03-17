@@ -32,10 +32,7 @@ fun FragmentActivity.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
-    checkAndAskPermission(
-        permissions.filter { true },
-        getPermissionListener(listener)
-    )
+    checkAndAskPermission(permissions.filter { true }, getPermissionListener(listener))
 }
 
 /**
@@ -45,10 +42,7 @@ fun Fragment.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
-    activity?.checkAndAskPermission(
-        permissions.filter { true },
-        getPermissionListener(listener)
-    )
+    activity?.checkAndAskPermission(permissions.filter { true }, getPermissionListener(listener))
 }
 
 /**
@@ -71,10 +65,7 @@ infix fun FragmentActivity.getPermission(permission: String) {
  * @return true -> has permission, false otherwise
  */
 private fun hasPermission(context: Context, permission: String) =
-    (ContextCompat.checkSelfPermission(
-        context,
-        permission
-    ) == PackageManager.PERMISSION_GRANTED)
+    (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED)
 
 /**
  * To check the permission from FragmentActivity
@@ -84,6 +75,7 @@ private fun FragmentActivity.checkAndAskPermission(
     listener: MPermissionListener?
 ) {
     val notGrantedPermissions = permissions.filter { !hasPermission(this, it) }
+
     if (notGrantedPermissions.isEmpty()) listener?.granted() else {
         val mFragment = supportFragmentManager.findFragmentByTag(MFragment_TAG)
 
@@ -92,10 +84,7 @@ private fun FragmentActivity.checkAndAskPermission(
                 MFragment.newInstance(permissions = notGrantedPermissions as ArrayList<String>)
             fragment = fragment.setListener(listener)
 
-            supportFragmentManager.beginTransaction().add(
-                fragment,
-                MFragment_TAG
-            )
+            supportFragmentManager.beginTransaction().add(fragment, MFragment_TAG)
                 .commitNowAllowingStateLoss()
         }
     }

@@ -39,6 +39,7 @@ internal class MFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let { bundle ->
             bundle.getStringArrayList(ARG_PERMISSIONS)?.let {
                 permissions.addAll(it)
@@ -63,6 +64,7 @@ internal class MFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
         // Check for permissions and request the permissions
         if (permissions.size > 0) {
             // Convert to array and send that to requestPermissions

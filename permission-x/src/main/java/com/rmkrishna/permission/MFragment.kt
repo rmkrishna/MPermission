@@ -38,6 +38,7 @@ internal class MFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let { bundle ->
             bundle.getStringArrayList(ARG_PERMISSIONS)?.let {
                 permissions.addAll(it)
