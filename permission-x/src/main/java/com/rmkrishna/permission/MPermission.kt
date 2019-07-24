@@ -26,17 +26,33 @@ import androidx.fragment.app.FragmentActivity
 private const val MFragment_TAG = "MFragment_TAG"
 
 /**
- * To check and get the permission from AppCompatActivity
+ * To check and get the permission from FragmentActivity
+ *
+ * @param permissions - list of permissions
+ * @param listener - @PermissionListener
  */
 fun FragmentActivity.askPermissions(
     vararg permissions: String,
     listener: PermissionListener.() -> Unit
 ) {
-    checkAndAskPermission(permissions.filter { true }, getPermissionListener(listener))
+    checkAndAskPermission(permissions.toList(), getPermissionListener(listener))
+}
+
+/**
+ * To check whether the app has following permissions from FragmentActivity
+ *
+ * @return true -> If the app has all the permissions, false otherwise
+ */
+fun FragmentActivity.hasPermissions(vararg permissions: String): Boolean {
+    val firstNotGrantedPermissions = permissions.firstOrNull { !hasPermission(this, it) }
+    return firstNotGrantedPermissions.isNullOrEmpty()
 }
 
 /**
  * To check and get the permission from Fragment
+ *
+ * @param permissions - list of permissions
+ * @param listener - @PermissionListener
  */
 fun Fragment.askPermissions(
     vararg permissions: String,
@@ -47,6 +63,8 @@ fun Fragment.askPermissions(
 
 /**
  * To check a single permission and not expecting any result back from Fragment
+ *
+ * @param permission - single permission
  */
 infix fun Fragment.getPermission(permission: String) {
     activity?.checkAndAskPermission(arrayListOf(permission), null)
@@ -54,14 +72,22 @@ infix fun Fragment.getPermission(permission: String) {
 
 /**
  * To check a single permission and not expecting any result back from Activity
+ *
+ * @param permission - single permission
  */
 infix fun FragmentActivity.getPermission(permission: String) {
     checkAndAskPermission(arrayListOf(permission), null)
 }
 
+private fun hasPermissions(context: Context, permissions: List<String>): Boolean {
+    val firstNotGrantedPermissions = permissions.firstOrNull { !hasPermission(context, it) }
+    return firstNotGrantedPermissions.isNullOrEmpty()
+}
+
 /**
  * @param context
  * @param permission
+ *
  * @return true -> has permission, false otherwise
  */
 private fun hasPermission(context: Context, permission: String) =
