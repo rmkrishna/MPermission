@@ -84,6 +84,7 @@ internal class MFragment : Fragment() {
         grantResults: IntArray
     ) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
+
             var grantedAllPermissions = true
             val neverAskAgainPermissionList = mutableListOf<String>()
             val deniedPermissionList = arrayListOf<String>()
@@ -94,8 +95,7 @@ internal class MFragment : Fragment() {
                     grantedAllPermissions = false
 
                     if (!ActivityCompat.shouldShowRequestPermissionRationale(
-                            activity!!,
-                            permission
+                            activity!!, permission
                         )
                     ) {
                         neverAskAgainPermissionList.add(permission)

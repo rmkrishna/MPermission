@@ -39,7 +39,7 @@ android {
 
 dependencies {
     /*================================= AndroidX support Lib =================================*/
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha02'
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     /*================================= Base Permission Lib =================================*/
     api project(':permission-core')
 }

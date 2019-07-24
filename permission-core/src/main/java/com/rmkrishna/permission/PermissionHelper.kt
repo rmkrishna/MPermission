@@ -21,11 +21,6 @@ import android.Manifest
 
 typealias MHelper = Manifest.permission
 
-//val CALENDAR = arrayOf(MHelper.READ_CALENDAR, MHelper.WRITE_CALENDAR)
-//val CONTACTS = arrayOf(MHelper.READ_CONTACTS, MHelper.WRITE_CONTACTS, MHelper.GET_ACCOUNTS)
-//val LOCATION = arrayOf(MHelper.ACCESS_FINE_LOCATION, MHelper.ACCESS_COARSE_LOCATION)
-//val STORAGE = arrayOf(MHelper.READ_EXTERNAL_STORAGE, MHelper.WRITE_EXTERNAL_STORAGE)
-
 /**
  * Permission listener to get the state of the permission
  */
