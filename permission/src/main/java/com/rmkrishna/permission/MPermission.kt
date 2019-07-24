@@ -57,9 +57,7 @@ fun Fragment.askPermissions(
     listener: PermissionListener.() -> Unit
 ) {
     activity?.let {
-        it.checkAndAskPermission(
-            permissions.filter { true }, getPermissionListener(listener)
-        )
+        it.checkAndAskPermission(permissions.filter { true }, getPermissionListener(listener))
     }
 }
 
@@ -92,17 +90,12 @@ private fun FragmentActivity.checkAndAskPermission(
  * @return true -> has permission, false otherwise
  */
 private fun hasPermission(context: Context, permission: String) =
-    (ContextCompat.checkSelfPermission(
-        context,
-        permission
-    ) == PackageManager.PERMISSION_GRANTED)
+    (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED)
 
 object MPermission {
     @JvmStatic
     fun askPermissions(
-        activity: FragmentActivity,
-        vararg permissions: String,
-        listener: MPermissionListener
+        activity: FragmentActivity, vararg permissions: String, listener: MPermissionListener
     ) {
         activity.checkAndAskPermission(permissions.filter { true }, listener)
     }
