@@ -39,16 +39,6 @@ fun FragmentActivity.askPermissions(
 }
 
 /**
- * To check whether the app has following permissions from FragmentActivity
- *
- * @return true -> If the app has all the permissions, false otherwise
- */
-fun FragmentActivity.hasPermissions(vararg permissions: String): Boolean {
-    val firstNotGrantedPermissions = permissions.firstOrNull { !hasPermission(this, it) }
-    return firstNotGrantedPermissions.isNullOrEmpty()
-}
-
-/**
  * To check and get the permission from Fragment
  *
  * @param permissions - list of permissions
@@ -62,6 +52,15 @@ fun Fragment.askPermissions(
 }
 
 /**
+ * To check a single permission and not expecting any result back from Activity
+ *
+ * @param permission - single permission
+ */
+infix fun FragmentActivity.getPermission(permission: String) {
+    checkAndAskPermission(arrayListOf(permission), null)
+}
+
+/**
  * To check a single permission and not expecting any result back from Fragment
  *
  * @param permission - single permission
@@ -71,14 +70,50 @@ infix fun Fragment.getPermission(permission: String) {
 }
 
 /**
- * To check a single permission and not expecting any result back from Activity
+ * To check whether the app has following permissions from FragmentActivity
  *
- * @param permission - single permission
+ * @return true -> If the app has all the permissions, false otherwise
  */
-infix fun FragmentActivity.getPermission(permission: String) {
-    checkAndAskPermission(arrayListOf(permission), null)
+fun FragmentActivity.hasPermissions(vararg permissions: String): Boolean {
+    return hasPermissions(this, permissions.toList())
 }
 
+/**
+ * To check whether the app has following permissions from Fragment
+ *
+ * @return true -> If the app has all the permissions, false otherwise
+ */
+fun Fragment.hasPermissions(vararg permissions: String): Boolean {
+    activity?.let {
+        return hasPermissions(it, permissions.toList())
+    }
+    return false
+}
+
+/**
+ * To check whether the app has following permission from FragmentActivity
+ *
+ * @return true -> If the app has all the given permission, false otherwise
+ */
+infix fun FragmentActivity.hasPermission(permission: String): Boolean {
+    return hasPermission(this, permission)
+}
+
+/**
+ * To check whether the app has following permission from Fragment
+ *
+ * @return true -> If the app has all the given permission, false otherwise
+ */
+infix fun Fragment.hasPermission(permission: String): Boolean {
+    activity?.let {
+        return hasPermission(it, permission)
+    }
+    return false
+}
+
+/**
+ * To Check whether the app has following permissions
+ */
 private fun hasPermissions(context: Context, permissions: List<String>): Boolean {
     val firstNotGrantedPermissions = permissions.firstOrNull { !hasPermission(context, it) }
     return firstNotGrantedPermissions.isNullOrEmpty()
