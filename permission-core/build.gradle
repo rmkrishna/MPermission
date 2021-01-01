@@ -38,9 +38,9 @@ android {
 }
 dependencies {
     /*================================= Kotlin Lib =================================*/
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.41"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.21"
     /*================================= Testing Lib =================================*/
-    testImplementation 'junit:junit:4.13-beta-3'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
