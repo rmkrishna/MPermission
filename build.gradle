@@ -55,7 +55,7 @@ ext {
             'compileSdkVersion': 30,
             'targetSdkVersion' : "30",
             'buildToolsVersion': '29.0.3',
-            'libVersionCode'   : 21,
-            'libVersionName'   : '1.3.40'
+            'libVersionCode'   : 22,
+            'libVersionName'   : '1.4.0'
     ]
 }
