@@ -18,6 +18,7 @@
 package com.rmkrishna.sample.appx
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.rmkrishna.permission.MHelper
 import com.rmkrishna.permission.askPermissions
@@ -31,13 +32,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (this hasPermission MHelper.CAMERA) {
-
+            Toast.makeText(this, "Already have Camera Permission", Toast.LENGTH_SHORT).show()
+        } else {
+            this getPermission MHelper.CAMERA
         }
 
-        this getPermission MHelper.CAMERA
 
-        this.askPermissions(MHelper.CAMERA) {
-
-        }
+//        this.askPermissions(MHelper.CAMERA) {
+//
+//        }
     }
 }
