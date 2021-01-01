@@ -91,7 +91,7 @@ internal class MFragment : Fragment() {
                     // Some permissions are not granted
                     grantedAllPermissions = false
                     if (!ActivityCompat.shouldShowRequestPermissionRationale(
-                            activity!!,
+                            requireActivity(),
                             permission
                         )
                     ) {
